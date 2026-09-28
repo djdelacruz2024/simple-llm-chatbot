@@ -3,6 +3,9 @@ const messageInput = document.getElementById("messageInput");
 const chatMessages = document.getElementById("chatMessages");
 const sendButton = document.getElementById("sendButton");
 
+// Completed user/assistant turns, sent with each request so the bot remembers the conversation.
+const history = [];
+
 function addMessage(text, className) {
     const message = document.createElement("div");
     message.className = `message ${className}`;
@@ -32,7 +35,7 @@ chatForm.addEventListener("submit", async (event) => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ message: text }),
+            body: JSON.stringify({ message: text, history }),
         });
 
         const data = await response.json();
@@ -42,6 +45,7 @@ chatForm.addEventListener("submit", async (event) => {
         }
 
         loadingMessage.textContent = data.reply;
+        history.push({ role: "user", content: text }, { role: "assistant", content: data.reply });
     } catch (error) {
         loadingMessage.textContent = error.message;
         loadingMessage.classList.add("error-message");
