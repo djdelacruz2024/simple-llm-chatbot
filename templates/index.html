@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple LLM Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="chat-shell">
+        <section class="chat-card">
+            <header class="chat-header">
+                <h1>Simple LLM Chatbot</h1>
+                <p>Ask a question and get a quick AI response.</p>
+            </header>
+
+            <div id="chatMessages" class="chat-messages">
+                <div class="message bot-message">Hi! Send me a message to get started.</div>
+            </div>
+
+            <form id="chatForm" class="chat-form">
+                <input id="messageInput" type="text" placeholder="Type your message..." autocomplete="off" required>
+                <button id="sendButton" type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
